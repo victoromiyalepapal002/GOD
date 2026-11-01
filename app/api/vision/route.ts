@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { chatComplete, LlmError } from "@/lib/llm";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const PROMPTS = {
   vision: `Write a short, personal "vision" for the person: a hopeful, Scripture-rooted word of encouragement about the season ahead, using their name, focus and birth date as inspiration. 120-180 words. Include one accurate Bible verse.`,
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
   if (!(kind in PROMPTS)) return NextResponse.json({ error: "Bad request." }, { status: 400 });
 
   try {
-    const content = await chatComplete(
+    const { text: content } = await chatComplete(
       [
         {
           role: "system",

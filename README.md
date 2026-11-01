@@ -2,40 +2,55 @@
 
 A faith website: personal visions and horoscope-style words, an AI "Man of God" pastor chat, an AI "Jesus" chat (inspired by the Gospels), live services, and a prayer wall.
 
-**Stack:** Next.js 14 (App Router) · Tailwind · Supabase (auth + database) · free AI API (Gemini or Groq) · Vercel
+**Stack:** Next.js 14 (App Router) · Tailwind · Supabase (auth + database) · free AI (Gemini, Groq, OpenRouter with automatic failover) · Vercel
 
-## 1. Get a free AI key
-- **Gemini (default):** create a key at https://aistudio.google.com/apikey
-- **Groq (alternative):** create a key at https://console.groq.com and set `LLM_BASE_URL` and `LLM_MODEL` as shown in `.env.example`
-
-Free tiers have rate limits and model names change over time. If the AI says the limit was reached, wait a minute. If a model name stops working, change `LLM_MODEL`; no code changes are needed.
-
-## 2. Supabase
+## 1. Supabase
 1. Create a project at https://supabase.com.
-2. SQL Editor → paste `supabase/schema.sql` → Run.
-3. Project Settings → API → copy the **Project URL** and **anon key**.
+2. SQL Editor → run `supabase/schema.sql`, then run `supabase/ai_providers.sql`.
+3. Project Settings → API → copy the **Project URL**, the **anon key** and the **service_role key**.
 4. Authentication → URL Configuration → set Site URL to your Vercel URL once deployed.
+
+## 2. Environment variables
+Copy `.env.example` to `.env.local` for local use, and add the same values in Vercel → Project → Settings → Environment Variables:
+
+| Name | What it is |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service_role key (secret, server only) |
+| `ADMIN_EMAILS` | Your email. Comma separate several. |
+| `GEMINI_API_KEY`, `GROQ_API_KEY`, `OPENROUTER_API_KEY` | Optional. You can paste keys on the Admin page instead. |
 
 ## 3. Run locally
 ```bash
-cp .env.example .env.local   # fill in the values
 npm install
 npm run dev
 ```
 
 ## 4. Deploy on Vercel
 1. https://vercel.com/new → import this repo.
-2. Add environment variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `LLM_API_KEY` (and optionally `LLM_BASE_URL`, `LLM_MODEL`).
+2. Add the environment variables above.
 3. Deploy. Every push to `main` redeploys.
 
+## 5. Set up the AI (Admin page)
+1. Sign up on the site with the email in `ADMIN_EMAILS` and confirm it from your inbox.
+2. Open **Admin** in the menu.
+3. For Gemini, Groq and OpenRouter: paste a free key (links are on the page), edit the model if you want, then **Save changes**.
+4. Press **Test saved settings** on each one.
+5. Use the arrows to choose the order. Number 1 answers first. If it fails or hits its free limit, number 2 answers, then number 3. Untick **Enabled** to turn one off.
+
+Free tiers have limits, and free model names change over time. When a model stops working, change its name on the Admin page; no code change or redeploy is needed. Model names: Gemini at https://ai.google.dev/gemini-api/docs/models, Groq at https://console.groq.com/docs/models, OpenRouter at https://openrouter.ai/models (filter by free).
+
+Keys saved on the Admin page are stored in the `ai_providers` table, which the browser cannot read. They are not encrypted at rest beyond Supabase's own storage, so use free-tier keys only and keep your Supabase service_role key secret.
+
 ## Managing content
-- **Services:** Supabase → Table Editor → `services` (add title, time, and a YouTube Live / Zoom / Meet link in `stream_url`).
+- **Services:** Supabase → Table Editor → `services` (title, time, and a YouTube Live / Zoom / Meet link in `stream_url`).
 - **AI personalities and safety rules:** `lib/personas.ts`.
-- **AI provider:** `lib/llm.ts`.
+- **AI failover logic:** `lib/llm.ts`.
 
 ## Design
-Glass surfaces, a CSS-only 3D hero and tilt cards. No heavy 3D libraries, so pages stay fast. Motion switches off for visitors who prefer reduced motion.
+Glass surfaces, a CSS 3D glass cross inside orbiting rings, a halo moon, a slow constellation ring and rising spirit motes. No 3D library, so pages stay fast. Motion switches off for visitors who prefer reduced motion.
 
 ## Notes
 - The AI personas always identify as AI and are not real clergy or Jesus. Keep the footer disclaimers.
-- Keep `LLM_API_KEY` server-side only (never prefix it with `NEXT_PUBLIC_`).
+- Never prefix any AI key or the service_role key with `NEXT_PUBLIC_`.

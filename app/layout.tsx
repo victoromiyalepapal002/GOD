@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Figtree } from "next/font/google";
 import { createClient } from "@/lib/supabase/server";
+import { isAdmin } from "@/lib/admin";
+import Spirits from "@/components/Spirits";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -33,11 +35,13 @@ const links = [
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  const admin = isAdmin(user);
 
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="min-h-screen font-sans">
         <div className="aurora" aria-hidden="true"><i /><i /><i /></div>
+        <Spirits />
 
         <header className="sticky top-3 z-20 mx-auto mt-3 max-w-5xl px-3">
           <div className="glass flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-3xl px-5 py-3 md:rounded-full">
@@ -46,6 +50,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               {links.map(([href, label]) => (
                 <Link key={href} href={href} className="text-ivory/80 transition hover:text-gold">{label}</Link>
               ))}
+              {admin && (
+                <Link href="/admin" className="text-gold transition hover:text-glow">Admin</Link>
+              )}
               {user ? (
                 <form action="/auth/signout" method="post">
                   <button className="btn-ghost !px-4 !py-1 text-sm">Sign out</button>

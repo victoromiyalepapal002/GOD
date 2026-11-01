@@ -4,6 +4,7 @@ import { PERSONAS, type Persona } from "@/lib/personas";
 import { chatComplete, LlmError, type LlmMessage } from "@/lib/llm";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 export async function POST(req: Request) {
   const supabase = createClient();
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
   ];
 
   try {
-    const reply = await chatComplete(messages, 800);
+    const { text: reply } = await chatComplete(messages, 800);
     await supabase.from("chat_messages").insert([
       { user_id: user.id, persona, role: "user", content: text },
       { user_id: user.id, persona, role: "assistant", content: reply },

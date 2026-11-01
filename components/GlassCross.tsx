@@ -1,12 +1,18 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-// Two glass bars form the cross. Everything is CSS 3D: no WebGL, no 3D library.
+// Two glass bars form the cross, wrapped in three glowing orbit rings (an armillary sphere).
+// Everything is CSS 3D: no WebGL, no 3D library.
 const BARS = [
   { w: 56, h: 250, d: 30, y: 0 },
   { w: 160, h: 54, d: 30, y: -56 },
 ];
 const FACES = ["front", "back", "left", "right", "top", "bottom"];
+const RINGS = [
+  { cls: "ring-a", size: 330 },
+  { cls: "ring-b", size: 280 },
+  { cls: "ring-c", size: 230 },
+];
 
 export default function GlassCross() {
   const tilt = useRef<HTMLDivElement>(null);
@@ -51,6 +57,11 @@ export default function GlassCross() {
               </div>
             ))}
           </div>
+          {RINGS.map((r) => (
+            <div key={r.cls} className={`orbit ${r.cls}`} style={{ "--s": `${r.size}px` } as React.CSSProperties}>
+              <span className="orb" />
+            </div>
+          ))}
         </div>
       </div>
     </div>

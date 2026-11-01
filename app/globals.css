@@ -237,3 +237,82 @@ h1, h2, h3 {
   .tilt, .tilt-3d { transform: none !important; transition: none; }
   .btn, .btn-ghost { transition: none; }
 }
+
+/* ---------- Celestial layer ---------- */
+/* Orbit rings around the glass cross */
+.orbit {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: var(--s); height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  border-radius: 50%;
+  border: 1px solid rgba(232,200,120,.5);
+  box-shadow: 0 0 18px rgba(232,200,120,.18), inset 0 0 18px rgba(122,104,230,.15);
+  transform-style: preserve-3d;
+}
+.orbit.ring-a { animation: orbit-a 22s linear infinite; }
+.orbit.ring-b { border-color: rgba(122,104,230,.6); animation: orbit-b 30s linear infinite reverse; }
+.orbit.ring-c { border-color: rgba(93,180,232,.55); animation: orbit-c 38s linear infinite; }
+.orb {
+  position: absolute;
+  left: 50%; top: -5px;
+  width: 10px; height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: #fff4d1;
+  box-shadow: 0 0 14px 4px rgba(255,244,209,.8);
+}
+@keyframes orbit-a { from { transform: rotateX(72deg) rotateZ(0deg); }   to { transform: rotateX(72deg) rotateZ(360deg); } }
+@keyframes orbit-b { from { transform: rotateY(68deg) rotateZ(0deg); }   to { transform: rotateY(68deg) rotateZ(360deg); } }
+@keyframes orbit-c { from { transform: rotateX(-40deg) rotateY(40deg) rotateZ(0deg); } to { transform: rotateX(-40deg) rotateY(40deg) rotateZ(360deg); } }
+
+/* Faint halo moon and constellation ring behind everything */
+.aurora::before {
+  content: "";
+  position: absolute;
+  right: 8vw; top: 9vh;
+  width: clamp(120px, 16vmin, 190px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff9e6, #f1dfa8 45%, rgba(232,200,120,.15) 72%, transparent 74%);
+  box-shadow: 0 0 70px 20px rgba(232,200,120,.22);
+  opacity: .5;
+}
+.aurora::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 42%;
+  width: 150vmin; height: 150vmin;
+  margin: -75vmin 0 0 -75vmin;
+  border-radius: 50%;
+  border: 1px dashed rgba(232,200,120,.1);
+  animation: slow-turn 240s linear infinite;
+}
+@keyframes slow-turn { to { transform: rotate(360deg); } }
+
+/* Rising spirit motes */
+.spirits { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.spirits b {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: #fff4d1;
+  box-shadow: 0 0 10px 3px rgba(255,244,209,.55);
+  opacity: 0;
+  animation: rise-mote linear infinite;
+  will-change: transform, opacity;
+}
+@keyframes rise-mote {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  12%  { opacity: .85; }
+  80%  { opacity: .5; }
+  100% { transform: translate3d(var(--dx, 0), -105vh, 0); opacity: 0; }
+}
+@media (max-width: 640px) { .spirits b:nth-child(n+8) { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .orbit, .aurora::after { animation: none !important; }
+  .orbit.ring-a { transform: rotateX(72deg); }
+  .orbit.ring-b { transform: rotateY(68deg); }
+  .orbit.ring-c { transform: rotateX(-40deg) rotateY(40deg); }
+  .spirits { display: none; }
+}
