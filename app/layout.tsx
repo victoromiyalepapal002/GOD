@@ -30,6 +30,7 @@ const links = [
   ["/jesus", "Jesus"],
   ["/services", "Services"],
   ["/prayer", "Prayer wall"],
+  ["/heaven", "Heaven & Hell"],
   ["/give", "Give"],
 ];
 

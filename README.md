@@ -50,6 +50,9 @@ Keys saved on the Admin page are stored in the `ai_providers` table, which the b
 
 The site never handles money. Visitors either open your payment link or copy your account details and pay from their own bank. Check every number and link twice.
 
+## Heaven and Hell
+`/heaven` and `/hell` each have a themed look, a light 3D scene and an AI guide that answers from the Bible. Visitors must sign in. The guide uses whichever AI you have set first on the Admin page, with the same failover. To change how it speaks or what it avoids, edit `lib/realmPrompts.ts`; to change the starter questions, edit `lib/realms.ts`. These conversations are not saved.
+
 ## Managing content
 - **Services:** Supabase → Table Editor → `services` (title, time, and a YouTube Live / Zoom / Meet link in `stream_url`).
 - **AI personalities and safety rules:** `lib/personas.ts`.

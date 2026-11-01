@@ -316,3 +316,112 @@ h1, h2, h3 {
   .orbit.ring-c { transform: rotateX(-40deg) rotateY(40deg); }
   .spirits { display: none; }
 }
+
+/* ---------- Heaven and hell ---------- */
+.realm-heaven { --accent: #fff4d1; }
+.realm-hell   { --accent: #ff7a45; }
+
+.realm-glow { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.realm-glow.heaven {
+  background:
+    radial-gradient(70% 55% at 50% -5%, rgba(255,244,209,.4), transparent 70%),
+    radial-gradient(50% 40% at 18% 12%, rgba(93,180,232,.2), transparent 70%);
+}
+.realm-glow.hell {
+  background:
+    radial-gradient(90% 60% at 50% 115%, rgba(255,86,32,.45), rgba(120,20,10,.25) 45%, transparent 75%),
+    linear-gradient(180deg, rgba(40,4,4,.55), rgba(20,2,2,.1));
+}
+.embers { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.embers b {
+  position: absolute; bottom: -10px; border-radius: 50%;
+  background: #ff9a5c; box-shadow: 0 0 10px 3px rgba(255,106,61,.6);
+  opacity: 0; animation: rise-mote linear infinite; will-change: transform, opacity;
+}
+
+.realm-title { font-family: var(--font-display), Georgia, serif; }
+.realm-heaven .realm-title { color: #fff4d1; text-shadow: 0 0 40px rgba(255,244,209,.45); }
+.realm-hell .realm-title   { color: #ffb27a; text-shadow: 0 0 40px rgba(255,86,32,.55); }
+.realm-tab-active { color: #1a1405; background: linear-gradient(180deg, #f6dc98, #e8c878 55%, #d4aa4e); }
+.realm-hell .realm-tab-active { color: #1a0603; background: linear-gradient(180deg, #ffb27a, #ff6a3d 55%, #c63d1c); }
+.realm-hell .btn {
+  color: #1a0603;
+  background: linear-gradient(180deg, #ffb27a, #ff6a3d 55%, #c63d1c);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 8px 24px -8px rgba(255,106,61,.7);
+}
+.realm-hell .card { border-color: rgba(255,122,69,.28); }
+.realm-heaven .card { border-color: rgba(255,244,209,.3); }
+.realm-hell .input:focus { border-color: #ff7a45; box-shadow: inset 0 2px 6px rgba(0,0,0,.35), 0 0 0 3px rgba(255,122,69,.2); }
+
+.chip {
+  border-radius: 999px; padding: .45rem 1rem; text-align: left;
+  color: var(--ink); background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.2);
+  transition: background .18s, border-color .18s, transform .18s;
+}
+.chip:hover:not(:disabled) { background: rgba(255,255,255,.15); border-color: var(--accent); transform: translateY(-2px); }
+.chip:disabled { opacity: .5; }
+.bubble-user { color: #1a1405; background: linear-gradient(180deg, #f6dc98, #e8c878); }
+.realm-hell .bubble-user { color: #1a0603; background: linear-gradient(180deg, #ffb27a, #ff8d57); }
+
+/* 3D art */
+.realm-art { position: relative; height: 300px; display: grid; place-items: center; perspective: 900px; }
+.realm-art > * { grid-area: 1 / 1; }
+
+/* Heaven: glass gate opening onto light */
+.gate {
+  position: relative; width: 240px; height: 260px;
+  transform-style: preserve-3d;
+  transform: rotateX(4deg) rotateY(-12deg);
+  animation: gate-sway 12s ease-in-out infinite alternate;
+}
+.gate-light {
+  position: absolute; left: 50%; bottom: 0; width: 150px; height: 100%; margin-left: -75px;
+  border-radius: 80px 80px 0 0; filter: blur(14px);
+  background: linear-gradient(0deg, rgba(255,244,209,.95), rgba(255,244,209,.35) 55%, transparent);
+  animation: beam 6s ease-in-out infinite alternate;
+}
+.door {
+  position: absolute; bottom: 0; width: 50%; height: 100%;
+  border: 1px solid rgba(255,244,209,.6);
+  background: linear-gradient(135deg, rgba(255,255,255,.35), rgba(232,200,120,.12) 50%, rgba(93,180,232,.18));
+  box-shadow: inset 0 0 22px rgba(255,255,255,.25), 0 0 30px rgba(232,200,120,.25);
+}
+.door.l { left: 0;  border-radius: 120px 0 0 0; transform-origin: left center;  animation: door-l 9s ease-in-out infinite alternate; }
+.door.r { right: 0; border-radius: 0 120px 0 0; transform-origin: right center; animation: door-r 9s ease-in-out infinite alternate; }
+.gate-floor {
+  position: absolute; left: -30px; right: -30px; bottom: -14px; height: 28px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,244,209,.7), transparent 70%); filter: blur(6px);
+}
+@keyframes door-l { from { transform: rotateY(-24deg); } to { transform: rotateY(-52deg); } }
+@keyframes door-r { from { transform: rotateY(24deg); }  to { transform: rotateY(52deg); } }
+@keyframes beam { from { opacity: .65; transform: scaleX(.8); } to { opacity: 1; transform: scaleX(1.15); } }
+@keyframes gate-sway { to { transform: rotateX(4deg) rotateY(12deg); } }
+
+/* Hell: glowing rings sinking into a pit */
+.pit {
+  position: relative; width: 260px; height: 260px;
+  transform-style: preserve-3d; transform: rotateX(66deg);
+  animation: pit-turn 30s linear infinite;
+}
+.pit i {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid rgba(255,120,60,.7);
+  box-shadow: 0 0 22px rgba(255,86,32,.5), inset 0 0 22px rgba(255,86,32,.35);
+  transform: translateZ(calc(var(--k) * -26px)) scale(calc(1 - var(--k) * .12));
+}
+.pit-core {
+  width: 80px; height: 80px; border-radius: 50%; filter: blur(5px);
+  background: radial-gradient(circle, #fff0c9, #ff8a3d 40%, transparent 70%);
+  animation: pit-pulse 3s ease-in-out infinite alternate;
+}
+@keyframes pit-turn  { to { transform: rotateX(66deg) rotateZ(360deg); } }
+@keyframes pit-pulse { from { opacity: .6; transform: scale(.85); } to { opacity: 1; transform: scale(1.2); } }
+
+@media (max-width: 640px) { .realm-art { height: 240px; } .gate, .pit { scale: .8; } }
+@media (prefers-reduced-motion: reduce) {
+  .gate, .gate-light, .pit, .pit-core { animation: none !important; }
+  .door.l { animation: none !important; transform: rotateY(-38deg); }
+  .door.r { animation: none !important; transform: rotateY(38deg); }
+  .embers { display: none; }
+}

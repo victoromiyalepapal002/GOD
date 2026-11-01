@@ -70,6 +70,21 @@ export default function Home() {
         />
       </section>
 
+      <section className="mt-4 grid gap-4 md:grid-cols-2">
+        <TiltCard
+          href="/heaven"
+          title="Heaven"
+          desc="Walk through what the Bible says about the place God is preparing."
+          accent="#fff4d1"
+        />
+        <TiltCard
+          href="/hell"
+          title="Hell"
+          desc="A sober, honest look at judgment, and the mercy that meets it."
+          accent="#ff7a45"
+        />
+      </section>
+
       <section className="card mt-4 flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-semibold text-glow md:text-3xl">Give</h2>
