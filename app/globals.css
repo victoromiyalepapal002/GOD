@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: radial-gradient(ellipse at top, #1a2250 0%, #0b0f1f 60%) fixed;
+  color: #f3efe2;
+}
+
+.card {
+  @apply rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur;
+}
+.btn {
+  @apply inline-block rounded-full bg-gold px-5 py-2 font-semibold text-night transition hover:opacity-90 disabled:opacity-50;
+}
+.input {
+  @apply w-full rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-white placeholder-white/40 outline-none focus:border-gold;
+}
