@@ -1,10 +1,24 @@
 import "./globals.css";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Figtree } from "next/font/google";
 import { createClient } from "@/lib/supabase/server";
 
+const display = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+const body = Figtree({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "GOD – Faith, Vision & Fellowship",
+  title: "GOD: Faith, Vision and Fellowship",
   description: "Receive a word, pray, worship and talk with an AI pastor.",
 };
 
@@ -13,7 +27,7 @@ const links = [
   ["/man-of-god", "Man of God"],
   ["/jesus", "Jesus"],
   ["/services", "Services"],
-  ["/prayer", "Prayer Wall"],
+  ["/prayer", "Prayer wall"],
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,25 +35,31 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { data: { user } } = await supabase.auth.getUser();
 
   return (
-    <html lang="en">
-      <body className="min-h-screen font-serif">
-        <header className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-4">
-          <Link href="/" className="text-2xl font-bold tracking-widest text-gold">✦ GOD</Link>
-          <nav className="flex flex-wrap items-center gap-4 text-sm">
-            {links.map(([href, label]) => (
-              <Link key={href} href={href} className="hover:text-gold">{label}</Link>
-            ))}
-            {user ? (
-              <form action="/auth/signout" method="post">
-                <button className="rounded-full border border-white/20 px-3 py-1 hover:border-gold">Sign out</button>
-              </form>
-            ) : (
-              <Link href="/login" className="btn !py-1">Sign in</Link>
-            )}
-          </nav>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body className="min-h-screen font-sans">
+        <div className="aurora" aria-hidden="true"><i /><i /><i /></div>
+
+        <header className="sticky top-3 z-20 mx-auto mt-3 max-w-5xl px-3">
+          <div className="glass flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-3xl px-5 py-3 md:rounded-full">
+            <Link href="/" className="font-serif text-3xl font-bold tracking-[0.2em] text-gold">GOD</Link>
+            <nav className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
+              {links.map(([href, label]) => (
+                <Link key={href} href={href} className="text-ivory/80 transition hover:text-gold">{label}</Link>
+              ))}
+              {user ? (
+                <form action="/auth/signout" method="post">
+                  <button className="btn-ghost !px-4 !py-1 text-sm">Sign out</button>
+                </form>
+              ) : (
+                <Link href="/login" className="btn !px-4 !py-1 text-sm">Sign in</Link>
+              )}
+            </nav>
+          </div>
         </header>
-        <main className="mx-auto max-w-5xl px-4 pb-16">{children}</main>
-        <footer className="mx-auto max-w-5xl px-4 pb-8 text-center text-xs text-white/50">
+
+        <main className="mx-auto max-w-5xl px-4 pb-20 pt-4">{children}</main>
+
+        <footer className="mx-auto max-w-5xl px-4 pb-8 text-center text-xs text-ivory/50">
           AI features are for encouragement and entertainment. They are not real clergy, not Jesus, and not a substitute for professional help.
         </footer>
       </body>
