@@ -30,6 +30,7 @@ const links = [
   ["/jesus", "Jesus"],
   ["/services", "Services"],
   ["/prayer", "Prayer wall"],
+  ["/give", "Give"],
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/admin";
 import AdminPanel from "@/components/AdminPanel";
+import GivingAdmin from "@/components/GivingAdmin";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +31,12 @@ export default async function AdminPage() {
         Add keys, set each model, and choose which AI answers first. If one fails, the next one takes over.
       </p>
       <AdminPanel />
+
+      <h2 className="mt-14 text-3xl font-bold text-gold">Giving</h2>
+      <p className="mb-6 mt-1 max-w-xl text-ivory/70">
+        Add your bank account and payment links for tithes and donations. They appear on the Give page.
+      </p>
+      <GivingAdmin />
     </div>
   );
 }

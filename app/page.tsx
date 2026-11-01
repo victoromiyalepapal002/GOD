@@ -69,6 +69,14 @@ export default function Home() {
           className="md:col-span-2"
         />
       </section>
+
+      <section className="card mt-4 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold text-glow md:text-3xl">Give</h2>
+          <p className="mt-1 max-w-md text-ivory/75">Pay your tithe or make a donation. You decide the amount.</p>
+        </div>
+        <Link href="/give" className="btn">Give now</Link>
+      </section>
     </div>
   );
 }
