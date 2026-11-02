@@ -53,6 +53,8 @@ The site never handles money. Visitors either open your payment link or copy you
 ## Heaven and Hell
 `/heaven` and `/hell` each have a themed look, a light 3D scene and an AI guide that answers from the Bible. Visitors must sign in. The guide uses whichever AI you have set first on the Admin page, with the same failover. To change how it speaks or what it avoids, edit `lib/realmPrompts.ts`; to change the starter questions, edit `lib/realms.ts`. These conversations are not saved.
 
+Each page also shows four biblical beings with their own CSS 3D figure: Michael, Gabriel, the Seraphim and the Cherubim in heaven; Satan, Lucifer, Abaddon and Beelzebub in hell. Their names, meanings, verses and notes are in `lib/beings.ts`, and the figures are in `components/Avatar.tsx` and the end of `app/globals.css`. "Ask about …" sends a question to the AI guide. The figures are plain CSS (no images or 3D library) and pause when off screen.
+
 ## Managing content
 - **Services:** Supabase → Table Editor → `services` (title, time, and a YouTube Live / Zoom / Meet link in `stream_url`).
 - **AI personalities and safety rules:** `lib/personas.ts`.

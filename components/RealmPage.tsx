@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { REALMS, type Realm } from "@/lib/realms";
-import Explore from "@/components/Explore";
+import RealmContent from "@/components/RealmContent";
 import RealmArt from "@/components/RealmArt";
 import RealmBackdrop from "@/components/RealmBackdrop";
 
 export default function RealmPage({ realm }: { realm: Realm }) {
   const cfg = REALMS[realm];
-  const other: Realm = realm === "heaven" ? "hell" : "heaven";
 
   return (
     <div className={`realm-${realm} py-8`}>
@@ -35,17 +34,7 @@ export default function RealmPage({ realm }: { realm: Realm }) {
         <RealmArt realm={realm} />
       </section>
 
-      <section className="mt-8">
-        <Explore realm={realm} />
-        <p className="mt-4 max-w-2xl text-sm text-ivory/55">
-          Answers are written by an AI from the Bible and can contain mistakes. Churches differ on some of these questions, so read the passages yourself and talk with a pastor.
-          {" "}
-          <Link className="underline" href={`/${other}`}>
-            Explore {REALMS[other].title.toLowerCase()} instead
-          </Link>
-          .
-        </p>
-      </section>
+      <RealmContent realm={realm} />
     </div>
   );
 }

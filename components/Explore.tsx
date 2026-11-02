@@ -5,13 +5,16 @@ import { REALMS, type Realm } from "@/lib/realms";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-export default function Explore({ realm }: { realm: Realm }) {
+export type AskRequest = { text: string; n: number };
+
+export default function Explore({ realm, request }: { realm: Realm; request?: AskRequest }) {
   const cfg = REALMS[realm];
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
+  const handled = useRef(0);
 
   useEffect(() => {
     createClient().auth.getUser().then(({ data }) => setSignedIn(!!data.user));
@@ -19,6 +22,15 @@ export default function Explore({ realm }: { realm: Realm }) {
   useEffect(() => {
     if (msgs.length) bottom.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [msgs, busy]);
+
+  // A question sent from outside (for example "Ask the guide about Michael").
+  useEffect(() => {
+    if (request && request.n > handled.current && signedIn) {
+      handled.current = request.n;
+      ask(request.text);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [request?.n, signedIn]);
 
   async function ask(text: string) {
     const q = text.trim();

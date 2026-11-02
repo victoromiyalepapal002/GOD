@@ -17,6 +17,7 @@ export const REALMS: Record<
       "Will I recognise my loved ones in heaven?",
       "What will we do in heaven?",
       "Is heaven in the sky, or a new earth?",
+      "Who are the angels in the Bible?",
     ],
   },
   hell: {
@@ -30,6 +31,7 @@ export const REALMS: Record<
       "Do Christians agree about hell? Compare the main views",
       "Why would a loving God allow hell?",
       "How does grace save us from judgment?",
+      "Who are the demons in the Bible?",
       "I am afraid I am not saved. Help me.",
     ],
   },

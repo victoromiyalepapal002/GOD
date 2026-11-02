@@ -425,3 +425,245 @@ h1, h2, h3 {
   .door.r { animation: none !important; transform: rotateY(38deg); }
   .embers { display: none; }
 }
+
+/* ---------- Biblical beings ---------- */
+.beings { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .beings { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .beings { grid-template-columns: repeat(4, 1fr); } }
+
+.being { text-align: center; padding: 1.1rem 1rem 1.3rem; }
+.being::after {
+  content: ""; position: absolute; inset: 6px; border-radius: calc(1.5rem - 6px); pointer-events: none;
+  border: 1px solid rgba(var(--tone), .22);
+}
+.being-name { font-family: var(--font-display), Georgia, serif; font-size: 2rem; font-weight: 700; line-height: 1; color: #fff4d1; }
+.being-meaning { margin-top: .35rem; font-style: italic; font-size: .9rem; color: rgb(var(--tone)); }
+.being-refs { margin-top: .75rem; font-size: .75rem; color: rgba(246,240,224,.5); }
+.being-victory {
+  margin-top: .75rem; padding-top: .75rem; font-size: .8rem; line-height: 1.5; color: rgba(246,240,224,.8);
+  border-top: 1px solid rgba(var(--tone), .3);
+}
+
+.being .chip { width: 100%; text-align: center; border-radius: 1rem; font-size: .85rem; }
+
+/* Stage */
+.av { position: relative; height: 210px; display: grid; place-items: center; perspective: 700px; overflow: visible; }
+.av::before {
+  content: ""; position: absolute; left: 50%; bottom: 10px; width: 150px; height: 30px; margin-left: -75px;
+  border-radius: 50%; filter: blur(7px); opacity: .8; transition: opacity .3s, transform .3s;
+  background: radial-gradient(ellipse, rgba(var(--tone), .6), transparent 70%);
+}
+.being:hover .av::before { opacity: 1; transform: scaleX(1.25); }
+.av-stage {
+  position: relative; width: 0; height: 0; transform-style: preserve-3d; will-change: transform;
+  animation: av-swing 9s ease-in-out infinite alternate;
+}
+.being:nth-child(2) .av-stage { animation-duration: 11s; }
+.being:nth-child(3) .av-stage { animation-duration: 12s; }
+.being:nth-child(4) .av-stage { animation-duration: 10s; }
+.av-stage > * { position: absolute; transform-style: preserve-3d; }
+@keyframes av-swing {
+  from { transform: rotateY(-24deg) rotateX(4deg); }
+  to   { transform: rotateY(24deg)  rotateX(-2deg); }
+}
+/* Pause everything that is off screen */
+.beings:not(.live) .av *, .beings:not(.live) .av { animation-play-state: paused !important; }
+
+/* Shared parts */
+.orb {
+  left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, rgba(var(--tone), .95) 45%, rgba(var(--tone), .25) 80%);
+  box-shadow: 0 0 22px 6px rgba(var(--tone), .5);
+}
+.halo {
+  left: -32px; top: -96px; width: 64px; height: 64px; border-radius: 50%;
+  border: 2px solid rgba(var(--tone), .95);
+  box-shadow: 0 0 16px rgba(var(--tone), .6), inset 0 0 12px rgba(var(--tone), .4);
+  transform: rotateX(72deg); animation: halo-spin 8s linear infinite;
+}
+@keyframes halo-spin { to { transform: rotateX(72deg) rotateZ(360deg); } }
+
+/* Wings: overlapping leaf-shaped feathers fanning out from the shoulder */
+.wings, .wing { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; }
+.wing { top: var(--y, 0px); filter: drop-shadow(0 0 6px rgba(var(--tone), .5)); }
+.wing.l { left: -9px; animation: flap-l 3.4s ease-in-out infinite alternate; }
+.wing.r { left: 9px;  animation: flap-r 3.4s ease-in-out infinite alternate; }
+.wing i {
+  position: absolute; right: 0; top: -12px; height: 24px; width: calc(var(--w, 90px) * var(--sc, 1));
+  transform-origin: 100% 50%; transform: rotate(var(--r, 0deg));
+  clip-path: polygon(0 50%, 10% 18%, 55% 0, 100% 22%, 100% 78%, 55% 100%, 10% 82%);
+  background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(var(--tone), .6) 45%, rgba(var(--tone), .3));
+}
+.wing i:nth-child(1) { --r: 52deg;  --w: 74px; }
+.wing i:nth-child(2) { --r: 36deg;  --w: 92px; }
+.wing i:nth-child(3) { --r: 20deg;  --w: 104px; }
+.wing i:nth-child(4) { --r: 4deg;   --w: 102px; }
+.wing i:nth-child(5) { --r: -12deg; --w: 88px; }
+.wing i:nth-child(6) { --r: -28deg; --w: 66px; }
+.wings.sm .wing i:nth-child(n+5) { display: none; }
+@keyframes flap-l {
+  from { transform: rotate(calc(var(--base, 0deg) - 6deg)); }
+  to   { transform: rotate(calc(var(--base, 0deg) + 8deg)); }
+}
+@keyframes flap-r {
+  from { transform: scaleX(-1) rotate(calc(var(--base, 0deg) - 6deg)); }
+  to   { transform: scaleX(-1) rotate(calc(var(--base, 0deg) + 8deg)); }
+}
+.being:hover .wing.l, .being:hover .wing.r { animation-duration: 1.4s; }
+
+/* Michael: sword and shield */
+.shield {
+  left: -40px; top: -46px; width: 80px; height: 94px; transform: translateZ(-14px);
+  clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%);
+  background:
+    linear-gradient(#e8c878, #e8c878) 50% 14% / 6px 68% no-repeat,
+    linear-gradient(#e8c878, #e8c878) 50% 36% / 44px 6px no-repeat,
+    linear-gradient(160deg, #3b4f86, #24325c 60%, #172040);
+}
+.sword {
+  left: -7px; top: -84px; width: 14px; height: 116px; transform: translateZ(16px);
+  clip-path: polygon(50% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
+  background: linear-gradient(90deg, #8fa6cc, #fff 50%, #8fa6cc);
+  filter: drop-shadow(0 0 8px rgba(255,255,255,.6));
+}
+.guard  { left: -27px; top: 32px; width: 54px; height: 8px; border-radius: 4px; transform: translateZ(16px); background: linear-gradient(#ffe9a8, #c9a24d); }
+.hilt   { left: -4px;  top: 40px; width: 8px;  height: 26px; transform: translateZ(16px); background: linear-gradient(90deg, #8a6a2c, #e8c878, #8a6a2c); }
+.pommel { left: -7px;  top: 64px; width: 14px; height: 14px; border-radius: 50%; transform: translateZ(16px); background: radial-gradient(circle at 35% 30%, #fff4d1, #c9a24d); }
+
+/* Gabriel: horn with rings of sound */
+.horn {
+  left: -42px; top: -16px; width: 84px; height: 38px; transform-origin: 0 50%;
+  transform: translateZ(14px) rotate(-30deg);
+  clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 62%);
+  background: linear-gradient(90deg, #ffe9a8, rgba(var(--tone), 1));
+  filter: drop-shadow(0 0 8px rgba(var(--tone), .6));
+}
+.wave {
+  left: 26px; top: -50px; width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid rgba(var(--tone), .8); opacity: 0;
+  animation: wave 3.3s ease-out infinite; animation-delay: var(--d, 0s);
+}
+@keyframes wave { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(3); opacity: 0; } }
+
+/* Seraphim: six wings and a flame */
+.flame {
+  left: -16px; top: -32px; width: 32px; height: 32px; border-radius: 0 50% 50% 50%;
+  background: radial-gradient(circle at 60% 60%, #fff6cf, #ffc861 38%, #ff7a2e 75%);
+  box-shadow: 0 0 30px 10px rgba(255,150,60,.55);
+  animation: flicker 1.3s ease-in-out infinite alternate;
+}
+@keyframes flicker {
+  from { transform: rotate(-45deg) scale(.92); filter: brightness(1); }
+  to   { transform: rotate(-45deg) scale(1.12); filter: brightness(1.25); }
+}
+
+/* Cherubim: wheels within wheels, full of eyes */
+.gimbal { left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; }
+.ring {
+  position: absolute; left: -66px; top: -66px; width: 132px; height: 132px; border-radius: 50%;
+  border: 3px solid rgba(var(--tone), .95); transform-style: preserve-3d;
+  box-shadow: 0 0 14px rgba(var(--tone), .4), inset 0 0 12px rgba(var(--tone), .25);
+}
+.ring::before, .ring::after {
+  content: ""; position: absolute; left: calc(50% - 4px); width: 8px; height: 8px; border-radius: 50%;
+  background: #fff4d1; box-shadow: 0 0 8px 2px rgba(var(--tone), .9);
+}
+.ring::before { top: -5px; }
+.ring::after  { bottom: -5px; }
+.ring.r1 { animation: spin-x 9s linear infinite; }
+.ring.r2 { transform: scale(.78); animation: spin-y 7s linear infinite; }
+.ring.r3 { transform: scale(.56); animation: spin-z 11s linear infinite; }
+@keyframes spin-x { to { transform: rotateX(360deg); } }
+@keyframes spin-y { to { transform: scale(.78) rotateY(360deg); } }
+@keyframes spin-z { from { transform: scale(.56) rotateX(60deg) rotateZ(0); } to { transform: scale(.56) rotateX(60deg) rotateZ(360deg); } }
+
+/* Satan: the ancient serpent */
+.coil { left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; animation: coil-turn 16s linear infinite; }
+.coil i {
+  position: absolute; border-radius: 50%; border: 7px solid #6e1a14; border-top-color: #b32c1e;
+  width: calc(112px - var(--k) * 12px); height: calc(112px - var(--k) * 12px);
+  left: calc((112px - var(--k) * 12px) / -2); top: calc(40px - var(--k) * 14px - (112px - var(--k) * 12px) / 2);
+  box-shadow: 0 0 16px rgba(220,60,48,.5), inset 0 0 10px rgba(0,0,0,.7);
+  transform: rotateX(74deg);
+}
+@keyframes coil-turn { to { transform: rotateY(360deg); } }
+.neck { left: -9px; top: -54px; width: 18px; height: 46px; border-radius: 8px; background: linear-gradient(90deg, #4a0f0a, #a8281c, #4a0f0a); transform: translateZ(2px); }
+.hood {
+  left: -36px; top: -96px; width: 72px; height: 64px; transform: translateZ(0);
+  border-radius: 50% 50% 46% 46% / 78% 78% 22% 22%;
+  background: radial-gradient(ellipse at 50% 70%, #d23a2a, #7a1a12 55%, #3a0b08);
+}
+.snake-head {
+  left: -14px; top: -88px; width: 28px; height: 38px; transform: translateZ(4px);
+  clip-path: polygon(50% 0, 100% 40%, 80% 100%, 20% 100%, 0 40%);
+  background: linear-gradient(#e24a36, #5a120c);
+}
+.eye { top: -72px; width: 6px; height: 6px; border-radius: 50%; background: #ffd1a0; box-shadow: 0 0 10px 3px rgba(255,90,60,.9); transform: translateZ(8px); }
+.eye.a { left: -9px; }
+.eye.b { left: 3px; }
+
+/* Lucifer: a star falling from heaven */
+.star {
+  left: -40px; top: -40px; width: 80px; height: 80px;
+  clip-path: polygon(50.0% 0.0%,56.5% 34.3%,85.4% 14.6%,65.7% 43.5%,100.0% 50.0%,65.7% 56.5%,85.4% 85.4%,56.5% 65.7%,50.0% 100.0%,43.5% 65.7%,14.6% 85.4%,34.3% 56.5%,0.0% 50.0%,34.3% 43.5%,14.6% 14.6%,43.5% 34.3%);
+  background: radial-gradient(circle, #fff, #ffd98a 32%, #ff8a3d 66%, #7a2a10);
+  filter: drop-shadow(0 0 14px rgba(255,190,100,.8));
+  animation: tumble 5s ease-in-out infinite alternate;
+}
+@keyframes tumble {
+  from { transform: translate(-14px, -16px) rotate(-20deg); }
+  to   { transform: translate(16px, 18px) rotate(40deg); }
+}
+.trail {
+  left: -6px; top: -150px; width: 12px; height: 110px; transform-origin: 50% 100%; transform: rotate(24deg);
+  background: linear-gradient(transparent, rgba(255,190,100,.75)); filter: blur(3px);
+}
+.broken-halo {
+  left: 14px; top: -92px; width: 62px; height: 62px; border-radius: 50%;
+  border: 2px dashed rgba(255,210,130,.65); transform: rotate(-28deg) rotateX(68deg);
+  animation: drop-halo 6s ease-in-out infinite alternate;
+}
+@keyframes drop-halo { from { transform: translateY(-6px) rotate(-28deg) rotateX(68deg); } to { transform: translateY(14px) rotate(20deg) rotateX(68deg); } }
+
+/* Abaddon: a key above the abyss */
+.well { left: 0; top: 36px; width: 0; height: 0; transform-style: preserve-3d; transform: rotateX(70deg); animation: well-turn 18s linear infinite; }
+.well i {
+  position: absolute; border-radius: 50%; border: 2px solid rgba(var(--tone), .85);
+  width: calc(124px - var(--k) * 18px); height: calc(124px - var(--k) * 18px);
+  left: calc((124px - var(--k) * 18px) / -2); top: calc((124px - var(--k) * 18px) / -2);
+  transform: translateZ(calc(var(--k) * -16px));
+  box-shadow: 0 0 16px rgba(var(--tone), .45), inset 0 0 14px rgba(var(--tone), .3);
+}
+@keyframes well-turn { to { transform: rotateX(70deg) rotateZ(360deg); } }
+.key { left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; animation: key-float 4.5s ease-in-out infinite alternate, key-turn 12s linear infinite; }
+.key-bow   { left: -15px; top: -82px; width: 30px; height: 30px; border-radius: 50%; border: 5px solid #d9b25c; box-shadow: 0 0 14px rgba(232,200,120,.6); }
+.key-shaft { left: -3px;  top: -54px; width: 6px;  height: 74px; border-radius: 3px; background: linear-gradient(90deg, #8a6a2c, #f0d58a, #8a6a2c); }
+.key-tooth { left: 3px;   height: 6px; border-radius: 2px; background: linear-gradient(#f0d58a, #b8923f); }
+.key-tooth.t1 { top: 6px;  width: 16px; }
+.key-tooth.t2 { top: 16px; width: 11px; }
+@keyframes key-float { from { transform: translateY(-8px); } to { transform: translateY(8px); } }
+@keyframes key-turn  { to { rotate: y 360deg; } }
+
+/* Beelzebub: lord of the flies */
+.core {
+  left: -26px; top: -26px; width: 52px; height: 52px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #4a5e22, #12180a 70%);
+  box-shadow: 0 0 26px rgba(var(--tone), .4), inset 0 0 12px rgba(0,0,0,.8);
+}
+.crown {
+  left: -23px; top: -56px; width: 46px; height: 24px;
+  clip-path: polygon(0 100%, 0 20%, 25% 60%, 50% 0, 75% 60%, 100% 20%, 100% 100%);
+  background: linear-gradient(#6f8a34, #1d250d);
+}
+.swarm { left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; animation: swarm-turn 7s linear infinite; }
+.swarm b {
+  position: absolute; left: -3px; top: -3px; width: 7px; height: 7px; border-radius: 50%;
+  background: #e4f2a0; box-shadow: 0 0 6px 2px rgba(var(--tone), .85);
+  transform: rotateY(var(--a)) translateZ(var(--r)) translateY(var(--y));
+}
+@keyframes swarm-turn { to { transform: rotateY(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .av-stage, .av *, .being .av::before { animation: none !important; }
+  .wing.r { transform: scaleX(-1); }
+}
