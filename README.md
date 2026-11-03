@@ -1,12 +1,12 @@
 # GOD
 
-A faith website: personal visions and horoscope-style words, an AI "Man of God" pastor chat, an AI "Jesus" chat (inspired by the Gospels), live services, and a prayer wall.
+A faith website: personal visions and horoscope-style words, an AI "Man of God" pastor chat, an AI "Jesus" chat (inspired by the Gospels), live services, a prayer wall, daily verse and devotional, an online Bible, music and sermons, a Heaven and Hell guide, and a free "Sons of God" membership card.
 
 **Stack:** Next.js 14 (App Router) · Tailwind · Supabase (auth + database) · free AI (Gemini, Groq, OpenRouter with automatic failover) · Vercel
 
 ## 1. Supabase
 1. Create a project at https://supabase.com.
-2. SQL Editor → run `supabase/schema.sql`, then `supabase/ai_providers.sql`, then `supabase/giving.sql`.
+2. SQL Editor → run `supabase/schema.sql`, then `supabase/ai_providers.sql`, then `supabase/giving.sql`, then `supabase/content.sql` (devotionals, music and sermons, membership cards, prayer moderation). All are safe to run again.
 3. Project Settings → API → copy the **Project URL**, the **anon key** and the **service_role key**.
 4. Authentication → URL Configuration → set Site URL to your Vercel URL once deployed.
 
@@ -54,6 +54,16 @@ The site never handles money. Visitors either open your payment link or copy you
 `/heaven` and `/hell` each have a themed look, a light 3D scene and an AI guide that answers from the Bible. Visitors must sign in. The guide uses whichever AI you have set first on the Admin page, with the same failover. To change how it speaks or what it avoids, edit `lib/realmPrompts.ts`; to change the starter questions, edit `lib/realms.ts`. These conversations are not saved.
 
 Each page also shows four biblical beings with their own CSS 3D figure: Michael, Gabriel, the Seraphim and the Cherubim in heaven; Satan, Lucifer, Abaddon and Beelzebub in hell. Their names, meanings, verses and notes are in `lib/beings.ts`, and the figures are in `components/Avatar.tsx` and the end of `app/globals.css`. "Ask about …" sends a question to the AI guide. The figures are plain CSS (no images or 3D library) and pause when off screen.
+
+## Daily faith features
+- **Verse of the day** (`/verse`, and on the home page): built-in King James text, a different verse each date (`lib/verses.ts`).
+- **Daily devotional** (`/devotional`): if you wrote one for the day in Admin, that shows. Otherwise the AI writes one from the day's verse, saves it, and labels it as AI-written. Edit or replace any day in Admin → Devotionals.
+- **Online Bible** (`/bible`): read and search 66 books in KJV, WEB and YLT (all public domain) through the free bolls.life API, cached on the server. If it is ever down, KJV falls back to other free sources (`lib/bibleApi.ts`). I could not test the live API from my build environment, so open `/bible` once after deploying.
+- **Prayer** (`/prayer`): written prayers plus the prayer wall. Hide or delete requests in Admin → Prayer wall.
+- **Music and sermons** (`/media`): add YouTube, Spotify or direct audio links in Admin. No copyrighted audio is bundled.
+- **About God and salvation** (`/about-god`): the gospel explained simply, with FAQs.
+- **Sons of God card** (`/sons-of-god`): signed-in visitors make a free Son, Daughter or Child of God card with a number, and download it as an image.
+- Time zone for "today" is `NEXT_PUBLIC_TZ` (default `Africa/Lagos`).
 
 ## Managing content
 - **Services:** Supabase → Table Editor → `services` (title, time, and a YouTube Live / Zoom / Meet link in `stream_url`).

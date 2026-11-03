@@ -667,3 +667,178 @@ h1, h2, h3 {
   .av-stage, .av *, .being .av::before { animation: none !important; }
   .wing.r { transform: scaleX(-1); }
 }
+
+/* =====================================================================
+   Site chrome, typography and content components
+   ===================================================================== */
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.skip-link {
+  position: absolute; left: -999px; top: .5rem; z-index: 100; padding: .5rem 1rem; border-radius: 999px;
+  background: var(--gold); color: #1a1405; font-weight: 600;
+}
+.skip-link:focus { left: .75rem; }
+
+/* ---------- Navigation ---------- */
+.nav-bar {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .55rem .75rem .55rem 1.25rem; border-radius: 999px;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: .6rem; color: var(--gold);
+  font-family: var(--font-display), Georgia, serif; font-size: 1.75rem; font-weight: 700; letter-spacing: .2em;
+}
+.brand-cross, .mcard-cross { position: relative; display: inline-block; width: 14px; height: 22px; flex: none; }
+.brand-cross::before, .mcard-cross::before {
+  content: ""; position: absolute; left: 6px; top: 0; width: 2px; height: 22px; border-radius: 2px; background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+}
+.brand-cross::after, .mcard-cross::after {
+  content: ""; position: absolute; left: 0; top: 6px; width: 14px; height: 2px; border-radius: 2px; background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+}
+.nav-link {
+  display: inline-flex; align-items: center; gap: .25rem; padding: .45rem .85rem; border-radius: 999px;
+  font-size: .92rem; color: rgba(246,240,224,.82); transition: color .15s, background .15s; white-space: nowrap;
+}
+.nav-link:hover { color: var(--gold); background: rgba(255,255,255,.07); }
+.nav-link-on { color: var(--gold); background: rgba(232,200,120,.12); }
+
+.dropdown {
+  position: absolute; right: 0; top: calc(100% + .9rem); z-index: 40; width: min(24rem, 90vw);
+  display: grid; gap: .6rem; padding: 1rem; border-radius: 1.25rem; background: rgba(12, 16, 42, .92);
+}
+.dropdown-title { margin: .4rem 0 .15rem .75rem; font-size: .8rem; font-weight: 600; color: rgba(232,200,120,.8); }
+.dropdown-item { display: flex; flex-direction: column; gap: .1rem; padding: .55rem .75rem; border-radius: .8rem; transition: background .15s; }
+.dropdown-item:hover { background: rgba(255,255,255,.08); }
+
+.burger {
+  display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 12px;
+  border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06);
+}
+.burger span { display: block; height: 2px; border-radius: 2px; background: var(--ink); }
+.mobile-menu {
+  position: absolute; left: 0; right: 0; top: calc(100% + .6rem); z-index: 40; max-height: calc(100vh - 6.5rem); overflow-y: auto;
+  padding: 1rem; border-radius: 1.5rem; background: rgba(12, 16, 42, .95); border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,.7);
+}
+.mobile-menu .nav-link { display: flex; width: 100%; border-radius: .8rem; padding: .65rem .9rem; font-size: 1rem; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 5rem; padding: 3rem 0 2rem; border-top: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(transparent, rgba(5,7,20,.65));
+}
+.footer-title { font-weight: 600; color: var(--gold); }
+.footer-link { font-size: .92rem; color: rgba(246,240,224,.65); transition: color .15s; }
+.footer-link:hover { color: var(--gold); }
+
+/* ---------- Page typography ---------- */
+.page-title {
+  font-family: var(--font-display), Georgia, serif; font-weight: 700; line-height: 1.02; color: #fff4d1;
+  font-size: clamp(2.6rem, 7vw, 4.4rem); text-shadow: 0 0 40px rgba(255,244,209,.18);
+}
+.page-lead { margin-top: .85rem; max-width: 40rem; font-size: 1.15rem; color: rgba(246,240,224,.75); }
+.section-title {
+  font-family: var(--font-display), Georgia, serif; font-weight: 700; line-height: 1.1; color: var(--gold);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+}
+.prose-faith p { margin-top: 1rem; max-width: 65ch; font-size: 1.075rem; line-height: 1.85; color: rgba(246,240,224,.86); }
+.prose-faith p:first-child { margin-top: 0; }
+
+.verse-hero {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(232,200,120,.2), transparent 60%),
+    linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.04));
+}
+
+.skeleton {
+  border-radius: .6rem; background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.15), rgba(255,255,255,.06));
+  background-size: 200% 100%; animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+.chip.chip-on, .chip.chip-on:hover:not(:disabled) {
+  color: #1a1405; border-color: transparent; background: linear-gradient(180deg, #f6dc98, var(--gold) 55%, #d4aa4e);
+}
+
+/* ---------- Bible reader ---------- */
+.bible-text { font-family: var(--font-display), Georgia, serif; line-height: 1.95; color: rgba(246,240,224,.94); max-width: 46rem; }
+.verse { cursor: pointer; border-radius: .4rem; transition: background .15s; }
+.verse:hover { background: rgba(255,255,255,.06); }
+.verse sup {
+  margin-right: .3em; font-family: var(--font-body), system-ui, sans-serif; font-size: .55em; font-weight: 600;
+  color: var(--gold); vertical-align: super;
+}
+.verse.picked { background: rgba(232,200,120,.24); }
+.verse.linked { background: rgba(93,180,232,.24); }
+.result {
+  padding: .9rem 1.1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04);
+  transition: border-color .15s, background .15s;
+}
+.result:hover { border-color: rgba(232,200,120,.6); background: rgba(255,255,255,.08); }
+mark { color: inherit; background: rgba(232,200,120,.38); border-radius: .2rem; padding: 0 .12rem; }
+
+/* ---------- FAQ ---------- */
+.faq summary { display: flex; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; font-weight: 600; color: #fff4d1; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--gold); }
+.faq[open] summary::after { content: "\2212"; }
+.faq p { margin-top: .75rem; color: rgba(246,240,224,.8); }
+
+/* ---------- Music facade ---------- */
+.yt-facade { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: .9rem; background: #000; }
+.yt-facade img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .2s, transform .3s; }
+.yt-facade:hover img { opacity: 1; transform: scale(1.03); }
+.yt-facade .play {
+  position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+  background: rgba(232,200,120,.95); box-shadow: 0 0 30px rgba(232,200,120,.6);
+}
+.yt-facade .play::after {
+  content: ""; position: absolute; left: 25px; top: 19px; border-left: 20px solid #1a1405;
+  border-top: 13px solid transparent; border-bottom: 13px solid transparent;
+}
+
+/* ---------- Sons of God card ---------- */
+.mcard-stage { display: grid; place-items: center; padding: .5rem; perspective: 900px; }
+.mcard {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between; width: min(100%, 440px);
+  aspect-ratio: 1.586; padding: 1.4rem 1.5rem; overflow: hidden; border-radius: 1.3rem; color: var(--ink);
+  background: linear-gradient(135deg, #243088 0%, #0d1236 55%, #3b2a74 100%);
+  border: 1px solid rgba(232,200,120,.6);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 30px 60px -25px rgba(0,0,0,.85), 0 0 40px -10px rgba(122,104,230,.5);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .15s ease-out; will-change: transform;
+}
+.mcard::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(320px circle at var(--mx, 25%) var(--my, 0%), rgba(255,255,255,.28), transparent 60%);
+}
+.mcard::after {
+  content: ""; position: absolute; inset: 7px; pointer-events: none; border-radius: calc(1.3rem - 7px);
+  border: 1px solid rgba(232,200,120,.3);
+}
+.mcard-top { display: flex; align-items: center; gap: .65rem; color: var(--gold); }
+.mcard-brand { font-family: var(--font-display), Georgia, serif; font-size: 1.5rem; font-weight: 700; letter-spacing: .06em; }
+.mcard-name { font-family: var(--font-display), Georgia, serif; font-size: clamp(1.6rem, 6vw, 2.3rem); font-weight: 700; line-height: 1.05; color: #fff4d1; overflow-wrap: anywhere; }
+.mcard-title { margin-top: .2rem; font-style: italic; color: var(--gold); }
+.mcard-motto { margin-top: .35rem; font-size: .85rem; font-style: italic; color: rgba(246,240,224,.8); }
+.mcard-bottom { display: flex; justify-content: space-between; gap: .5rem; font-size: .72rem; letter-spacing: .03em; color: rgba(246,240,224,.72); }
+@media (prefers-reduced-motion: reduce) { .mcard { transform: none !important; transition: none; } }
+
+/* ---------- Home tiles ---------- */
+.tile {
+  display: flex; flex-direction: column; gap: .35rem; padding: 1.2rem; border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.12); transition: transform .2s ease, border-color .2s, background .2s;
+}
+.tile:hover { transform: translateY(-3px); border-color: rgba(232,200,120,.55); background: linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.05)); }
+.tile-icon {
+  display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: .35rem; border-radius: 14px; color: var(--gold);
+  background: rgba(232,200,120,.12); border: 1px solid rgba(232,200,120,.3);
+}
+.tile h3 { font-family: var(--font-display), Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #fff4d1; }
+.tile p { font-size: .92rem; color: rgba(246,240,224,.7); }
+@media (prefers-reduced-motion: reduce) { .tile:hover { transform: none; } }
