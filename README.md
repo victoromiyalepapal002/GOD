@@ -63,6 +63,7 @@ Each page also shows four biblical beings with their own CSS 3D figure: Michael,
 - **Music and sermons** (`/media`): add YouTube, Spotify or direct audio links in Admin. No copyrighted audio is bundled.
 - **About God and salvation** (`/about-god`): the gospel explained simply, with FAQs.
 - **Sons of God card** (`/sons-of-god`): signed-in visitors make a free Son, Daughter or Child of God card with a number, and download it as an image.
+- **Book of Life** (`/book-of-life`): a private journal for signed-in visitors: prayers (mark answered), thankfulness, Scripture notes and testimonies. Only the author can read their pages (row level security).
 - Time zone for "today" is `NEXT_PUBLIC_TZ` (default `Africa/Lagos`).
 
 ## Managing content

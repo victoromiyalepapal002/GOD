@@ -24,7 +24,7 @@ const MORE: { title: string; items: [string, string, string][] }[] = [
     ],
   },
   { title: "Learn", items: [["/about-god", "About God and salvation", "Know God and grow closer"]] },
-  { title: "Community", items: [["/sons-of-god", "Sons of God card", "Your free membership card"]] },
+  { title: "Community", items: [["/book-of-life", "Book of Life", "Your private prayer and thanks journal"], ["/sons-of-god", "Sons of God card", "Your free membership card"]] },
 ];
 
 export default function Nav({ signedIn, admin }: { signedIn: boolean; admin: boolean }) {

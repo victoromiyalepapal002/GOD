@@ -79,3 +79,21 @@ create policy "anyone reads visible prayers" on public.prayer_requests
 -- Visitors can post only what they type. The prayer count and hidden flag are system-controlled.
 revoke insert on public.prayer_requests from anon, authenticated;
 grant insert (user_id, display_name, request) on public.prayer_requests to authenticated;
+
+-- ---------- Book of Life (private journal) ----------
+-- Each person sees and edits only their own pages.
+create table if not exists public.life_entries (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  kind text not null default 'prayer' check (kind in ('prayer','gratitude','scripture','testimony')),
+  body text not null check (char_length(body) between 1 and 1000),
+  verse_ref text check (verse_ref is null or char_length(verse_ref) <= 60),
+  answered boolean not null default false,
+  answered_at timestamptz,
+  created_at timestamptz not null default now()
+);
+create index if not exists life_entries_user_idx on public.life_entries (user_id, created_at desc);
+alter table public.life_entries enable row level security;
+drop policy if exists "own pages" on public.life_entries;
+create policy "own pages" on public.life_entries for all
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);

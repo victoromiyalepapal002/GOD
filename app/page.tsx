@@ -10,6 +10,7 @@ const rise = (i: number) => ({ "--i": i } as React.CSSProperties);
 const DAILY: { href: string; icon: IconName; title: string; desc: string }[] = [
   { href: "/devotional", icon: "sun", title: "Daily devotional", desc: "A short teaching, a prayer and a question for today." },
   { href: "/bible", icon: "book", title: "Read the Bible", desc: "Read and search every book, in three free translations." },
+  { href: "/book-of-life", icon: "book", title: "Book of Life", desc: "Your private journal of prayers, answers and thanks." },
   { href: "/prayer", icon: "heart", title: "Prayer", desc: "Read prayers, and share a request for others to pray over." },
   { href: "/media", icon: "music", title: "Music and sermons", desc: "Worship songs and teachings to play any time." },
 ];
@@ -51,7 +52,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Every day">
+      <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label="Every day">
         {DAILY.map((d) => (
           <Link key={d.href} href={d.href} className="tile">
             <span className="tile-icon"><Icon name={d.icon} /></span>

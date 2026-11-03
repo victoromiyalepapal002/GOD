@@ -4,7 +4,7 @@ const COLUMNS: { title: string; links: [string, string][] }[] = [
   { title: "Read", links: [["/bible", "The Bible"], ["/verse", "Verse of the day"], ["/devotional", "Daily devotional"], ["/about-god", "About God and salvation"]] },
   { title: "Pray and worship", links: [["/prayer", "Prayer"], ["/media", "Music and sermons"], ["/services", "Services"], ["/give", "Give"]] },
   { title: "Ask and explore", links: [["/man-of-god", "Man of God (AI)"], ["/jesus", "Jesus (AI)"], ["/visions", "Visions and horoscope"], ["/heaven", "Heaven"], ["/hell", "Hell"]] },
-  { title: "Community", links: [["/sons-of-god", "Sons of God card"], ["/login", "Sign in"]] },
+  { title: "Community", links: [["/book-of-life", "Book of Life"], ["/sons-of-god", "Sons of God card"], ["/login", "Sign in"]] },
 ];
 
 export default function SiteFooter() {
