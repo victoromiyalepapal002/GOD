@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300">
+<defs>
+<radialGradient id="bg" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#1b2260"/><stop offset="1" stop-color="#070a1c"/></radialGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0bd"/><stop offset=".55" stop-color="#e8c878"/><stop offset="1" stop-color="#c79a3c"/></linearGradient>
+<radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e8c878" stop-opacity=".55"/><stop offset="1" stop-color="#e8c878" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="960" height="300" rx="28" fill="url(#bg)"/>
+<circle cx="150" cy="150" r="95" fill="url(#halo)"/>
+<ellipse cx="150" cy="150" rx="86" ry="30" fill="none" stroke="#e8c878" stroke-opacity=".55" stroke-width="2" transform="rotate(-24 150 150)"/>
+<ellipse cx="150" cy="150" rx="86" ry="30" fill="none" stroke="#7a68e6" stroke-opacity=".6" stroke-width="2" transform="rotate(24 150 150)"/>
+<rect x="138" y="70" width="24" height="160" rx="6" fill="url(#gold)"/>
+<rect x="100" y="106" width="100" height="24" rx="6" fill="url(#gold)"/>
+<text x="270" y="160" font-family="Cormorant Garamond, Georgia, serif" font-size="84" font-weight="700" letter-spacing="6" fill="url(#gold)">SONS OF GOD</text>
+<text x="274" y="205" font-family="Georgia, serif" font-size="22" letter-spacing="7" fill="#f6f0e0" fill-opacity=".7">COME AS YOU ARE</text>
+</svg>

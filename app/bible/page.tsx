@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import BibleReader from "@/components/BibleReader";
 
-export const metadata = { title: "Read the Bible: GOD" };
+export const metadata = { title: "Read the Bible" };
 
 export default function BiblePage() {
   return (

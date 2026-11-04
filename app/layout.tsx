@@ -21,7 +21,7 @@ const body = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: { default: "GOD: Faith, Vision and Fellowship", template: "%s | GOD" },
+  title: { default: "Sons of God: Faith, Vision and Fellowship", template: "%s | Sons of God" },
   description: "Read the Bible, pray, find a daily devotional and verse, worship, and talk with an AI pastor.",
 };
 

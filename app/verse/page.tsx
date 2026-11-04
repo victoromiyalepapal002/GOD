@@ -3,7 +3,7 @@ import { dateKey, prettyDate, shiftKey } from "@/lib/today";
 import { verseForDate } from "@/lib/verses";
 import ShareButtons from "@/components/ShareButtons";
 
-export const metadata = { title: "Verse of the day: GOD" };
+export const metadata = { title: "Verse of the day" };
 
 export default function VersePage() {
   const today = dateKey();

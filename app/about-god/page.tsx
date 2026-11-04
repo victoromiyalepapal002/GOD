@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "About God and salvation: GOD" };
+export const metadata = { title: "About God and salvation" };
 
 type Verse = { ref: string; text: string };
 type Section = { id: string; title: string; body: string[]; verses: Verse[] };

@@ -67,7 +67,7 @@ export async function callProvider(
     "Content-Type": "application/json",
     Authorization: `Bearer ${key}`,
   };
-  if (p.id === "openrouter") headers["X-Title"] = "GOD";
+  if (p.id === "openrouter") headers["X-Title"] = "Sons of God";
 
   let res: Response;
   try {

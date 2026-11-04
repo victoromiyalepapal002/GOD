@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import MediaClient from "@/components/MediaClient";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Listen: worship music and sermons: GOD" };
+export const metadata = { title: "Listen: worship music and sermons" };
 
 export default async function Media() {
   const { data, error } = await createClient()

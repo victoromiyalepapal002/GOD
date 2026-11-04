@@ -5,7 +5,7 @@ import { getDevotional, recentDevotionals } from "@/lib/devotional";
 import ShareButtons from "@/components/ShareButtons";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Daily devotional: GOD" };
+export const metadata = { title: "Daily devotional" };
 
 export default async function DevotionalPage({ searchParams }: { searchParams: { date?: string } }) {
   const today = dateKey();

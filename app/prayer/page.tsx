@@ -1,6 +1,6 @@
 import PrayerTabs from "@/components/PrayerTabs";
 
-export const metadata = { title: "Prayer: GOD" };
+export const metadata = { title: "Prayer" };
 
 export default function Prayer() {
   return (

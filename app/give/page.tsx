@@ -3,7 +3,7 @@ import GiveClient from "@/components/GiveClient";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Give: GOD" };
+export const metadata = { title: "Give" };
 
 export default async function Give() {
   const supabase = createClient();

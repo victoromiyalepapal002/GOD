@@ -1,4 +1,4 @@
-# GOD
+# Sons of God
 
 A faith website: personal visions and horoscope-style words, an AI "Man of God" pastor chat, an AI "Jesus" chat (inspired by the Gospels), live services, a prayer wall, daily verse and devotional, an online Bible, music and sermons, a Heaven and Hell guide, and a free "Sons of God" membership card.
 

@@ -687,7 +687,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 }
 .brand {
   display: inline-flex; align-items: center; gap: .6rem; color: var(--gold);
-  font-family: var(--font-display), Georgia, serif; font-size: 1.75rem; font-weight: 700; letter-spacing: .2em;
+  font-family: var(--font-display), Georgia, serif; font-size: 1.5rem; font-weight: 700; letter-spacing: .08em; white-space: nowrap;
 }
 .brand-cross, .mcard-cross { position: relative; display: inline-block; width: 14px; height: 22px; flex: none; }
 .brand-cross::before, .mcard-cross::before {

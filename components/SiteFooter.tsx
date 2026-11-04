@@ -13,7 +13,7 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
-            <p className="brand !text-2xl"><span className="brand-cross" aria-hidden="true" />GOD</p>
+            <p className="brand !text-2xl"><span className="brand-cross" aria-hidden="true" />Sons of God</p>
             <p className="mt-3 max-w-xs text-sm text-ivory/60">Come as you are. Read, pray, worship and grow in faith.</p>
           </div>
           {COLUMNS.map((c) => (

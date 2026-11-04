@@ -1,6 +1,6 @@
 import SonsOfGod from "@/components/SonsOfGod";
 
-export const metadata = { title: "Sons of God card: GOD" };
+export const metadata = { title: "Sons of God card" };
 
 export default function SonsOfGodPage() {
   return (

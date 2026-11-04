@@ -8,7 +8,7 @@ import MediaAdmin from "@/components/MediaAdmin";
 import PrayerAdmin from "@/components/PrayerAdmin";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Admin: GOD" };
+export const metadata = { title: "Admin" };
 
 const SECTIONS = [
   ["ai", "AI", "Add keys, set each model, and choose which AI answers first. If one fails, the next one takes over."],

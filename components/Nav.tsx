@@ -69,9 +69,9 @@ export default function Nav({ signedIn, admin }: { signedIn: boolean; admin: boo
 
   return (
     <div className="glass nav-bar" ref={box}>
-      <Link href="/" className="brand" aria-label="GOD home">
+      <Link href="/" className="brand" aria-label="Sons of God home">
         <span className="brand-cross" aria-hidden="true" />
-        GOD
+        Sons of God
       </Link>
 
       {/* Desktop */}
