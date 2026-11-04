@@ -10,12 +10,6 @@ A faith website: personal visions and horoscope-style words, an AI "Man of God" 
 3. Project Settings → API → copy the **Project URL**, the **anon key** and the **service_role key**.
 4. Authentication → URL Configuration → set Site URL to your Vercel URL once deployed.
 
-### Optional: Continue with Google
-1. Google Cloud Console → create a project → **APIs & Services → OAuth consent screen** (External), then **Credentials → Create credentials → OAuth client ID → Web application**.
-2. Under **Authorized redirect URIs** add `https://YOUR-PROJECT.supabase.co/auth/v1/callback`.
-3. Copy the Client ID and Client Secret into Supabase → Authentication → Providers → Google → Enable → Save.
-4. In Supabase → Authentication → URL Configuration, make sure Site URL is your Vercel address and `https://your-address/**` is in Redirect URLs.
-
 ## 2. Environment variables
 Copy `.env.example` to `.env.local` for local use, and add the same values in Vercel → Project → Settings → Environment Variables:
 
