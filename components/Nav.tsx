@@ -20,6 +20,7 @@ const MORE: { title: string; items: [string, string, string][] }[] = [
       ["/man-of-god", "Man of God", "Talk with an AI pastor"],
       ["/jesus", "Jesus", "An AI inspired by the Gospels"],
       ["/visions", "Visions and horoscope", "A word for your season"],
+      ["/debate", "The Great Debate", "Jesus and the devil, with Scripture"],
       ["/heaven", "Heaven and Hell", "Angels, judgment and hope"],
     ],
   },

@@ -6,6 +6,7 @@ import { isAdmin } from "@/lib/admin";
 import Spirits from "@/components/Spirits";
 import Nav from "@/components/Nav";
 import SiteFooter from "@/components/SiteFooter";
+import ViewCounter from "@/components/ViewCounter";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <main id="main" className="mx-auto max-w-6xl px-4 pb-10 pt-6">{children}</main>
 
+        <div className="mx-auto flex max-w-6xl justify-center px-4"><ViewCounter /></div>
         <SiteFooter />
       </body>
     </html>

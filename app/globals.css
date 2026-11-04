@@ -842,3 +842,35 @@ mark { color: inherit; background: rgba(232,200,120,.38); border-radius: .2rem; 
 .tile h3 { font-family: var(--font-display), Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #fff4d1; }
 .tile p { font-size: .92rem; color: rgba(246,240,224,.7); }
 @media (prefers-reduced-motion: reduce) { .tile:hover { transform: none; } }
+
+/* ---------- View counter ---------- */
+.view-counter {
+  display: inline-flex; align-items: center; gap: .45rem; margin-top: 3rem; padding: .4rem .9rem; border-radius: 999px;
+  font-size: .85rem; color: rgba(246,240,224,.75); border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05);
+}
+.view-counter svg { color: var(--gold); }
+
+/* ---------- Debate ---------- */
+.live-dot {
+  display: inline-block; width: .6rem; height: .6rem; margin-right: .5rem; border-radius: 50%; background: #ff5a3c;
+  box-shadow: 0 0 0 0 rgba(255,90,60,.7); animation: livepulse 1.6s infinite; vertical-align: middle;
+}
+@keyframes livepulse { 70% { box-shadow: 0 0 0 10px rgba(255,90,60,0); } 100% { box-shadow: 0 0 0 0 rgba(255,90,60,0); } }
+.dbt { display: flex; gap: .8rem; align-items: flex-start; }
+.dbt-devil { flex-direction: row-reverse; }
+.dbt-badge {
+  display: grid; flex: none; place-items: center; width: 42px; height: 42px; border-radius: 50%;
+  color: var(--gold); background: rgba(232,200,120,.12); border: 1px solid rgba(232,200,120,.4);
+}
+.dbt-devil .dbt-badge { color: #ff8a5c; background: rgba(255,90,60,.12); border-color: rgba(255,90,60,.45); }
+.dbt-bubble {
+  max-width: min(100%, 36rem); padding: .9rem 1.1rem; border-radius: 1.2rem; line-height: 1.7;
+  background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); border: 1px solid rgba(232,200,120,.35);
+}
+.dbt-devil .dbt-bubble { background: linear-gradient(135deg, rgba(255,90,60,.16), rgba(60,10,10,.25)); border-color: rgba(255,90,60,.4); }
+.dbt-name { font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.dbt-devil .dbt-name { color: #ff8a5c; }
+.dbt-name span { font-weight: 400; letter-spacing: .04em; text-transform: none; color: rgba(246,240,224,.5); }
+.dbt-typing { font-size: .9rem; font-style: italic; color: rgba(246,240,224,.6); animation: typing 1.6s ease-in-out infinite; }
+@keyframes typing { 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .live-dot, .dbt-typing { animation: none; } }

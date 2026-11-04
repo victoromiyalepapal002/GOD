@@ -70,6 +70,8 @@ Each page also shows four biblical beings with their own CSS 3D figure: Michael,
 - **About God and salvation** (`/about-god`): the gospel explained simply, with FAQs.
 - **Sons of God card** (`/sons-of-god`): signed-in visitors make a free Son, Daughter or Child of God card with a number, and download it as an image.
 - **Book of Life** (`/book-of-life`): a private journal for signed-in visitors: prayers (mark answered), thankfulness, Scripture notes and testimonies. Only the author can read their pages (row level security).
+- **The Great Debate** (`/debate`): in Admin → Debates add a topic. Jesus and the devil (AI portrayals) debate it, the devil opening and Jesus closing. Press "Start and write all" to write it at once, or "Go live" and visitors' browsers advance it one speech every 35 seconds. The page lists live, up next and past debates. Prompts are in `lib/debate.ts`. The AI can misquote verses, so the page tells readers to check them.
+- **View counter**: every main page shows its total views (one per visitor per browser session). Pages that count are listed in `lib/views.ts`.
 - Time zone for "today" is `NEXT_PUBLIC_TZ` (default `Africa/Lagos`).
 
 ## Managing content

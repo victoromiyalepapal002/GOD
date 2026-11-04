@@ -115,7 +115,7 @@ export default function DevotionalAdmin() {
         {msg && <p className="text-sm text-gold" role="status">{msg}</p>}
       </div>
       <p className="text-sm text-ivory/50">
-        If you do nothing, the AI writes each day's devotional from that day's verse when the first visitor opens the page. Anything you save here replaces it.
+        If you do nothing, the AI writes each day&apos;s devotional from that day&apos;s verse when the first visitor opens the page. Anything you save here replaces it.
       </p>
     </div>
   );

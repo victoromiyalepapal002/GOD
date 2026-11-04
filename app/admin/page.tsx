@@ -6,6 +6,7 @@ import GivingAdmin from "@/components/GivingAdmin";
 import DevotionalAdmin from "@/components/DevotionalAdmin";
 import MediaAdmin from "@/components/MediaAdmin";
 import PrayerAdmin from "@/components/PrayerAdmin";
+import DebateAdmin from "@/components/DebateAdmin";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin" };
@@ -15,6 +16,7 @@ const SECTIONS = [
   ["giving", "Giving", "Add your bank account and payment links for tithes and donations. They appear on the Give page."],
   ["devotionals", "Devotionals", "Read, write or fix the daily devotional. Anything you save replaces the AI's version for that day."],
   ["media", "Music and sermons", "Add worship songs and sermons from YouTube, Spotify or direct audio links. They appear on the Listen page."],
+  ["debates", "Debates", "Add a topic. Jesus and the devil debate it with Scripture, and the AI writes each speech. Start it live, or write it all at once."],
   ["prayers", "Prayer wall", "Review requests. Hide anything unkind or private, or delete it."],
 ] as const;
 
@@ -54,6 +56,7 @@ export default async function AdminPage() {
           {id === "devotionals" && <DevotionalAdmin />}
           {id === "media" && <MediaAdmin />}
           {id === "prayers" && <PrayerAdmin />}
+          {id === "debates" && <DebateAdmin />}
         </section>
       ))}
     </div>

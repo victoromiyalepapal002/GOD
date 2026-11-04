@@ -70,6 +70,10 @@ export default function Home() {
         <TiltCard href="/services" title="Services" desc="See upcoming services and join live." accent="#e8c878" className="md:col-span-3" />
       </section>
 
+      <section className="mt-4">
+        <TiltCard href="/debate" title="The Great Debate" desc="Jesus and the devil debate a topic with Scripture. Watch it live, or read past debates." accent="#ff7a45" />
+      </section>
+
       <section className="mt-4 grid gap-4 md:grid-cols-2">
         <TiltCard href="/heaven" title="Heaven" desc="Walk through what the Bible says about the place God is preparing, and meet its angels." accent="#fff4d1" />
         <TiltCard href="/hell" title="Hell" desc="A sober, honest look at judgment, the fallen powers, and the mercy that meets it." accent="#ff7a45" />

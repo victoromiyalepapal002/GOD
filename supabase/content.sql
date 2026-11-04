@@ -97,3 +97,48 @@ alter table public.life_entries enable row level security;
 drop policy if exists "own pages" on public.life_entries;
 create policy "own pages" on public.life_entries for all
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+-- ---------- Debates: Jesus and the devil (AI teaching drama) ----------
+create table if not exists public.debates (
+  id uuid primary key default gen_random_uuid(),
+  topic text not null check (char_length(topic) between 5 and 200),
+  status text not null default 'upcoming' check (status in ('upcoming','live','finished')),
+  rounds int not null default 4 check (rounds between 1 and 8),
+  scheduled_for timestamptz,
+  started_at timestamptz,
+  finished_at timestamptz,
+  lock_until timestamptz,
+  created_at timestamptz not null default now()
+);
+create table if not exists public.debate_turns (
+  id uuid primary key default gen_random_uuid(),
+  debate_id uuid not null references public.debates(id) on delete cascade,
+  seq int not null,
+  speaker text not null check (speaker in ('jesus','devil')),
+  body text not null,
+  created_at timestamptz not null default now(),
+  unique (debate_id, seq)
+);
+alter table public.debates enable row level security;
+alter table public.debate_turns enable row level security;
+drop policy if exists "anyone reads debates" on public.debates;
+drop policy if exists "anyone reads debate turns" on public.debate_turns;
+create policy "anyone reads debates" on public.debates for select using (true);
+create policy "anyone reads debate turns" on public.debate_turns for select using (true);
+-- Writes happen only on the server (service role).
+
+-- ---------- Page view counter ----------
+create table if not exists public.page_views (
+  path text primary key,
+  views bigint not null default 0
+);
+alter table public.page_views enable row level security;
+
+create or replace function public.increment_view(p text)
+returns bigint language sql security definer set search_path = public as $$
+  insert into public.page_views (path, views) values (p, 1)
+  on conflict (path) do update set views = public.page_views.views + 1
+  returning views
+$$;
+revoke execute on function public.increment_view(text) from public, anon, authenticated;
+grant execute on function public.increment_view(text) to service_role;
